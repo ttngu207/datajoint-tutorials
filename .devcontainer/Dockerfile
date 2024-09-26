@@ -1,7 +1,9 @@
-FROM python:3.9-slim@sha256:5f0192a4f58a6ce99f732fe05e3b3d00f12ae62e183886bca3ebe3d202686c7f 
-
-ENV PATH /usr/local/bin:$PATH
-ENV PYTHON_VERSION 3.9.17
+ARG PY_VER
+ARG DISTRO
+FROM mcr.microsoft.com/devcontainers/python:${PY_VER}-${DISTRO}
+RUN \
+    apt update && \
+    apt-get install bash-completion graphviz default-mysql-client -y
 
 RUN \
     adduser --system --disabled-password --shell /bin/bash vscode && \
